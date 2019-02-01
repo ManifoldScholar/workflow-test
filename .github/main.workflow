@@ -1,8 +1,8 @@
 workflow "doc test" {
   on = "pull_request"
   resolves = [
-    "Notify: Start
-    "Notify: End",
+    "Notify: Start",
+    "Notify: End"
   ]
 }
 
