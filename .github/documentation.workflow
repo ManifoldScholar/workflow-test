@@ -14,4 +14,3 @@ action "GitHub Action for Slack" {
   args = "Workflow was triggered"
   secrets = ["SLACK_WEBHOOK"]
 }
-
