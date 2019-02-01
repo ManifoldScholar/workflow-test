@@ -1,6 +1,6 @@
 workflow "New workflow" {
-  on = "pull_request"
   resolves = ["GitHub Action for Slack"]
+  on = "issue_comment"
 }
 
 action "GitHub Action for Slack" {
