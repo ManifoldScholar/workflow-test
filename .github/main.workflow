@@ -1,11 +1,18 @@
 workflow "doc test" {
   on = "pull_request"
   resolves = [
-    "Notify Slack",
+    "Notify: Start
+    "Notify: End",
   ]
 }
 
-action "Notify Slack" {
+action "Notify: Start" {
+  uses = "Ilshidur/action-slack@5b3a58f5e0ff655ca9c17a22516efdf9d0de36bf"
+  secrets = ["SLACK_WEBHOOK"]
+  args = "Action was triggered"
+}
+
+action "Notify: End" {
   uses = "Ilshidur/action-slack@5b3a58f5e0ff655ca9c17a22516efdf9d0de36bf"
   needs = "Ensure documentation label"
   secrets = ["SLACK_WEBHOOK"]
