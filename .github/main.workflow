@@ -1,5 +1,5 @@
 workflow "doc test" {
-  on = "issue_comment"
+  on = "pull_request"
   resolves = [
     "Notify Slack",
   ]
@@ -7,12 +7,18 @@ workflow "doc test" {
 
 action "Notify Slack" {
   uses = "Ilshidur/action-slack@5b3a58f5e0ff655ca9c17a22516efdf9d0de36bf"
-  needs = "Filter by label"
+  needs = "Ensure documentation label"
   secrets = ["SLACK_WEBHOOK"]
   args = "this is a test"
 }
 
-action "Filter by label" {
+action "Ensure documentation label" {
   uses = "actions/bin/filter@c6471707d308175c57dfe91963406ef205837dbd"
   args = "label documentation"
+  needs = "Ensure closed pull request"
+}
+
+action "Ensure closed pull request" {
+  uses = "actions/bin/filter@master"
+  args = "action closed"
 }
